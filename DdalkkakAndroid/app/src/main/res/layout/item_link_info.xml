@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="data"
+            type="com.example.ddalkkak_android.data.LinkInfo" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        urlClickListener="@{data.originalUrl}"
+        android:layout_width="match_parent"
+        android:layout_marginVertical="12dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_link_info_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:text="@{data.username}"
+            android:textSize="20sp"
+            android:visibility="@{data.username==null ? View.INVISIBLE : View.VISIBLE}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="user" />
+
+        <TextView
+            android:id="@+id/tv_link_info_title"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:gravity="left"
+            android:maxLines="4"
+            android:text="@{data.title}"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_link_info_user"
+            tools:text="title" />
+
+        <ImageView
+            android:id="@+id/tv_link_info_thumbnail"
+            imgUrl="@{data.thumbUrl}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_link_info_user"
+            tools:src="@drawable/ic_launcher_background" />
+
+        <!--        <TextView-->
+        <!--            android:id="@+id/tv_link_info_url"-->
+        <!--            imgClickListener="@{data.originalUrl}"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginBottom="12dp"-->
+        <!--            android:text="@{data.originalUrl}"-->
+        <!--            android:textColor="@color/teal_200"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/tv_link_info_thumbnail"-->
+        <!--            tools:text="sdlkfjsdlf" />-->
+
+        <TextView
+            android:id="@+id/tv_link_info_created_at"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:text="@{data.slackCreatedAt}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="2024-01-12" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

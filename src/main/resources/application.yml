@@ -1,0 +1,62 @@
+server.port: 8085
+debug: false
+management.endpoints.web.exposure.include: "*"
+
+logging:
+  level:
+    org.springframework.web.servlet: info
+    org.hibernate.type.descriptor.sql.BasicBinder: trace
+springdoc:
+  show-actuator: true
+  swagger-ui:
+    enabled: true
+
+slack:
+  #  url: ${SLACK_URL}
+  token: ENC(ULgUuqJhJ17lRm1MTo9MiwI89CdaGlfvSGCxfRUGUYwlLyEjt6NWoRP56MrJtAIeuSmM+j8N+j2KwjoLYphXeqa8ApUcX3eu)
+  team: ENC(zZuv/Qq3XKfjcMeiRj8fQPtDwBbA5qz2)
+  channel:
+    random: ENC(e4mtNkpwjo32mrXHphorDDZVDZ4ghnil)
+    learn: ENC(uHXQmxTo8ms2kS/n2Dnk+XmcLnDhV3hw)
+
+
+spring:
+  mvc:
+    cors:
+      allowed-origins: "*"
+      allowed-methods: "GET, POST, PUT, DELETE"
+  application.name: project
+  datasource:
+    url: ENC(wjeyRG+RS2/5lTBTiwRjMM06XoUeh+zqfWNZd6wkn3P/cxUXu3QkwQytIza3c0TtH+/s3dqbx1k=)
+    #    url: ${LOCAL_DB_NAME}
+    username: ENC(W8ysyKV/mEYrrDKfNW9qIA==)
+    #    username: ${LOCAL_USER_NAME}
+    password: ENC(53bm72/Wdh2CEhaWVq4SwQ==)
+  #    password: ${LOCAL_USER_PASSWORD}
+  jpa:
+    open-in-view: false
+    defer-datasource-initialization: true
+    generate-ddl: true
+    hibernate.ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+      hibernate.default_batch_fetch_size: 100
+  sql.init.mode: always
+  data.rest:
+    base-path: /api
+    detection-strategy: annotated
+  thymeleaf3:
+    cache: false
+    decoupled-logic: true
+  devtools:
+    livereload:
+      enabled: true
+  freemarker:
+    cache: false
+    prefix=file: src/main/resources/templates/
+---
+
+spring:
+  config.activate.on-profile: test
+  datasource.url: jdbc:h2:mem:testdb
