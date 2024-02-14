@@ -1,10 +1,11 @@
-package com.example.ddalkkak_android.ui
+package com.example.ddalkkak_android.ui.fragment
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.example.ddalkkak_android.R
 import com.example.ddalkkak_android.databinding.FragmentHomeBinding
+import com.example.ddalkkak_android.ui.viewmodel.LinkInfoViewModel
 import com.example.ddalkkak_android.ui.adapter.LinkInfoListAdapter
 import com.example.ddalkkak_android.util.BaseViewUtil
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,7 +23,8 @@ class HomeFragment : BaseViewUtil.BaseFragment<FragmentHomeBinding>(R.layout.fra
         initView()
     }
 
-    private fun initData() {
+
+    override fun initData() {
         linkInfoAdapter = LinkInfoListAdapter()
         linkInfoViewModel.getLinkInfos()
     }

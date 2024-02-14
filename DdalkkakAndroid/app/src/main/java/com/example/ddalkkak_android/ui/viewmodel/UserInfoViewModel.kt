@@ -1,4 +1,4 @@
-package com.example.ddalkkak_android.ui
+package com.example.ddalkkak_android.ui.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

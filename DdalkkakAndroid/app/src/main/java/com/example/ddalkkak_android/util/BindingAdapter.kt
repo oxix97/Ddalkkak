@@ -8,7 +8,7 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.example.ddalkkak_android.R
-import com.example.ddalkkak_android.ui.LinkInfoActivity
+import com.example.ddalkkak_android.ui.activity.LinkInfoActivity
 
 @BindingAdapter("imgUrl")
 fun setImageUrl(view: ImageView, url: String?) {

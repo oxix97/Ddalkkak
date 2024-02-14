@@ -9,7 +9,7 @@
 
         <variable
             name="linkInfoViewModel"
-            type="com.example.ddalkkak_android.ui.LinkInfoViewModel" />
+            type="com.example.ddalkkak_android.ui.viewmodel.LinkInfoViewModel" />
     </data>
 
     <LinearLayout

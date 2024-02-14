@@ -1,4 +1,4 @@
-package com.example.ddalkkak_android.ui
+package com.example.ddalkkak_android.ui.activity
 
 import android.content.Intent
 import android.os.Bundle

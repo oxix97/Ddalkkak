@@ -1,37 +1,38 @@
-package com.example.ddalkkak_android.ui
+package com.example.ddalkkak_android.ui.fragment
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.ddalkkak_android.R
-import com.example.ddalkkak_android.databinding.FragmentSearchBinding
+import com.example.ddalkkak_android.databinding.FragmentUsersBinding
 import com.example.ddalkkak_android.ui.adapter.UserInfoAdapter
+import com.example.ddalkkak_android.ui.viewmodel.UserInfoViewModel
 import com.example.ddalkkak_android.util.BaseViewUtil
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
 @AndroidEntryPoint
-class SearchFragment : BaseViewUtil.BaseFragment<FragmentSearchBinding>(R.layout.fragment_search) {
+class UsersFragment : BaseViewUtil.BaseFragment<FragmentUsersBinding>(R.layout.fragment_users) {
     private val userInfoViewModel: UserInfoViewModel by viewModels()
     private lateinit var userInfoAdapter: UserInfoAdapter
-//    private lateinit var linkInfoAdapter: LinkInfoListAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.userInfoViewModel = userInfoViewModel
-        binding.lifecycleOwner = this@SearchFragment
+        binding.lifecycleOwner = this@UsersFragment
         initData()
         initAdapter()
         initView()
     }
 
-    //    private val linkInfoViewModel: LinkInfoViewModel by viewModels()
-    private fun initData() {
+    override fun initData() {
         userInfoAdapter = UserInfoAdapter()
         userInfoViewModel.getUsers()
     }
 
     override fun initView() {
+
     }
 
     private fun initAdapter() {
@@ -41,7 +42,9 @@ class SearchFragment : BaseViewUtil.BaseFragment<FragmentSearchBinding>(R.layout
         }
 
         with(binding.rvUserContainer) {
+            this.layoutManager = GridLayoutManager(requireContext(), 2)
             adapter = userInfoAdapter
         }
     }
+
 }

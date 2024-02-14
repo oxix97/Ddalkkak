@@ -1,10 +1,11 @@
-package com.example.ddalkkak_android.ui
+package com.example.ddalkkak_android.ui.fragment
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.example.ddalkkak_android.R
 import com.example.ddalkkak_android.databinding.FragmentMyBinding
+import com.example.ddalkkak_android.ui.viewmodel.LinkInfoViewModel
 import com.example.ddalkkak_android.ui.adapter.LinkInfoListAdapter
 import com.example.ddalkkak_android.util.BaseViewUtil
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,7 +21,7 @@ class MyFragment : BaseViewUtil.BaseFragment<FragmentMyBinding>(R.layout.fragmen
         initView()
     }
 
-    private fun initData() {
+    override fun initData() {
         linkInfoAdapter = LinkInfoListAdapter()
         linkInfoViewModel.getLikeInfo(16)
     }

@@ -49,6 +49,7 @@ sealed class BaseViewUtil {
         }
 
         abstract fun initView()
+        abstract fun initData()
     }
 
     abstract class BaseBottomDialogFragment<T : ViewDataBinding>(@LayoutRes val layout: Int) :
