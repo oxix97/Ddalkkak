@@ -6,9 +6,13 @@ import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat.startActivity
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.ddalkkak_android.R
+import com.example.ddalkkak_android.data.LinkInfo
 import com.example.ddalkkak_android.ui.activity.LinkInfoActivity
+import com.example.ddalkkak_android.ui.adapter.LinkInfoListAdapter
+import com.example.ddalkkak_android.ui.viewmodel.LinkInfoViewModel
 
 @BindingAdapter("imgUrl")
 fun setImageUrl(view: ImageView, url: String?) {
@@ -16,12 +20,12 @@ fun setImageUrl(view: ImageView, url: String?) {
         Glide.with(view.context)
             .load(url)
             .error(R.drawable.ic_launcher_foreground)
-            .override(320,260)
+            .override(320, 260)
             .into(view)
     } else {
         Glide.with(view.context)
             .load(R.drawable.kernel360)
-            .override(320,260)
+            .override(320, 260)
             .into(view)
     }
 }
