@@ -4,12 +4,13 @@ import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.os.Bundle
+import androidx.room.Room
+import com.example.ddalkkak_android.dao.AppDatabase
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
 @HiltAndroidApp
 class DdalkkakApplication : Application(), Application.ActivityLifecycleCallbacks {
-
     init {
         instance = this
     }
