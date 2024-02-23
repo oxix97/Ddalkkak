@@ -1,4 +1,3 @@
-import org.jetbrains.kotlin.storage.CacheResetOnProcessCanceled.enabled
 import java.io.FileInputStream
 import java.util.Properties
 
@@ -60,10 +59,10 @@ android {
 }
 
 dependencies {
-
-    //DataStore
-    implementation ("androidx.datastore:datastore-preferences:1.0.0")
-    implementation("androidx.datastore:datastore-preferences-core:1.0.0")
+    implementation ("androidx.room:room-runtime:2.6.1")
+    annotationProcessor("androidx.room:room-compiler:2.6.1")
+    kapt ("androidx.room:room-compiler:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
 
     // SavedState
     implementation ("androidx.lifecycle:lifecycle-viewmodel-savedstate:2.7.0")
