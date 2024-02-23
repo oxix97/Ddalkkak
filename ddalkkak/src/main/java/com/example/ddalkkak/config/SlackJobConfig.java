@@ -25,28 +25,31 @@ import java.util.List;
 @RequiredArgsConstructor
 @Configuration
 public class SlackJobConfig {
-    private final JobRepository jobRepository;
-    private final JobCompletionNotificationListener listener;
-    private final PlatformTransactionManager transactionManager;
-    private final DataSource dataSource;
     private final SlackService slackService;
 
     @Bean
-    public Job job() throws Exception {
+    public Job job(
+            final JobRepository jobRepository,
+            final Step step
+    ) {
         return new JobBuilder("job", jobRepository)
                 .incrementer(new RunIdIncrementer())
-                .listener(listener)
-                .start(step())
+                .listener(new JobCompletionNotificationListener())
+                .start(step)
                 .build();
     }
 
     @Bean
-    public Step step() throws Exception {
+    public Step step(
+            final JobRepository jobRepository,
+            final PlatformTransactionManager transactionManager,
+            final DataSource dataSource
+    ) {
         return new StepBuilder("step", jobRepository)
                 .<ResponseMessage, LinkInfo>chunk(100, transactionManager)
                 .reader(itemReader())
                 .processor(itemProcessor())
-                .writer(itemWriter())
+                .writer(itemWriter(dataSource))
                 .build();
     }
 
@@ -61,18 +64,21 @@ public class SlackJobConfig {
     }
 
     @Bean
-    public JdbcBatchItemWriter<LinkInfo> itemWriter() {
+    public JdbcBatchItemWriter<LinkInfo> itemWriter(
+            DataSource dataSource
+    ) {
+        String sql = "INSERT INTO link_info (user, author_name, original_url, thumb_url, title, slack_created_at, ts, created_at, updated_at) " +
+                "VALUES (:user, :authorName, :originalUrl, :thumbUrl, :title, :slackCreatedAt, :ts, now(), now()) " +
+                "ON DUPLICATE KEY UPDATE " +
+                "author_name = :authorName, " +
+                "original_url = :originalUrl, " +
+                "thumb_url = :thumbUrl, " +
+                "title = :title, " +
+                "user = :user, " +
+                "updated_at = now()";
         return new JdbcBatchItemWriterBuilder<LinkInfo>()
                 .dataSource(dataSource)
-                .sql("INSERT INTO link_info (user, author_name, original_url, thumb_url, title, slack_created_at, ts, created_at, updated_at) " +
-                        "VALUES (:user, :authorName, :originalUrl, :thumbUrl, :title, :slackCreatedAt, :ts, now(), now()) " +
-                        "ON DUPLICATE KEY UPDATE " +
-                        "author_name = :authorName, " +
-                        "original_url = :originalUrl, " +
-                        "thumb_url = :thumbUrl, " +
-                        "title = :title, " +
-                        "user = :user, " +
-                        "updated_at = now()")
+                .sql(sql)
                 .beanMapped()
                 .build();
     }

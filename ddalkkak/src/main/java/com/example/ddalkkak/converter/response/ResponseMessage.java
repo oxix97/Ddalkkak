@@ -1,7 +1,16 @@
 package com.example.ddalkkak.converter.response;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.slack.api.model.Attachment;
 import com.slack.api.model.Message;
+import com.slack.api.model.block.LayoutBlock;
+import com.slack.api.model.block.RichTextBlock;
+import lombok.extern.slf4j.Slf4j;
 
+import java.util.ArrayList;
+import java.util.Objects;
+
+@Slf4j
 public record ResponseMessage(
         String user,
         String authorName,
@@ -31,13 +40,20 @@ public record ResponseMessage(
     public static ResponseMessage from(
             Message message
     ) {
+        var attachment = message.getAttachments().get(0);
+        String url = urlParser(attachment);
         return ResponseMessage.of(
                 message.getUser(),
-                message.getAttachments().get(0).getAuthorName(),
-                message.getAttachments().get(0).getOriginalUrl(),
-                message.getAttachments().get(0).getTitle(),
-                message.getAttachments().get(0).getThumbUrl(),
+                attachment.getAuthorName(),
+                url,
+                attachment.getTitle(),
+                attachment.getThumbUrl(),
                 message.getTs()
         );
+    }
+
+    private static String urlParser(Attachment attachment) {
+        if (attachment.getTitleLink() == null) return attachment.getAppUnfurlUrl();
+        return attachment.getTitleLink();
     }
 }

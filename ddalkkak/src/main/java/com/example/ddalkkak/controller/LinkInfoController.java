@@ -28,11 +28,8 @@ public class LinkInfoController {
 
     @GetMapping("/all")
     public List<ResponseLinkInfo> getLinks() {
-        return linkInfoService.getUserAndLinkInfos()
-                .stream()
+        return linkInfoService.getUserAndLinkInfos().stream()
                 .map(ResponseLinkInfo::of)
-                .sorted(Comparator.comparing(ResponseLinkInfo::slackCreatedAt)
-                        .reversed())
                 .toList();
     }
 
@@ -54,5 +51,14 @@ public class LinkInfoController {
     @GetMapping("/created/all")
     public List<LocalDate> getCreatedAts() {
         return linkInfoService.getCreatedAts();
+    }
+
+    @GetMapping("/search")
+    public List<ResponseLinkInfo> getSearchLinkInfos(
+            @RequestParam String keyword
+    ) {
+        return linkInfoService.getSearchLinkInfos(keyword).stream()
+                .map(ResponseLinkInfo::of)
+                .toList();
     }
 }

@@ -53,4 +53,8 @@ public class LinkInfoService {
                 .map(LinkInfo::getSlackCreatedAt)
                 .toList();
     }
+
+    public List<Object[]> getSearchLinkInfos(String keyword) {
+        return linkInfoRepository.findBySearchInfos(keyword);
+    }
 }

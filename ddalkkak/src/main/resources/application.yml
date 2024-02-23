@@ -18,7 +18,7 @@ spring:
       allowed-methods: "GET, POST, PUT, DELETE"
   application.name: ddalkkak
   datasource:
-    url: ENC(Kt4iGTLuWzAs2oYbIldXhO19P3YTXnxs8DlQSR8EMAureTyAYRbye06FDZLVcwy9N7ZyvZf8aQw=)
+    url: ENC(W+xd0wSO+l2pvxjmJi1jdBYY2/mTcRsoRPe0kNFz5eT5/yIDvuDxzcIxKbuSz0FWGnvOEIM4DX0=)
     username: ENC(W8ysyKV/mEYrrDKfNW9qIA==)
     password: ENC(53bm72/Wdh2CEhaWVq4SwQ==)
   jpa:
@@ -45,7 +45,7 @@ jasypt:
     password: ${DDALKKAK_PASSWORD}
 
 slack:
-  token: ENC(htaf5zKgrnwVstupDH5mduCKoJyBu6hf22AplAeGQPQ8NAxkRILMPTPdQylrkA2OaAN2OF3/q7rrBoRWIH/Z3kHUDPS6jsZH)
+  token: ENC(D31tIztpo/tKuyK2e7usZk+TwdmzY2JzN8QaHPsnysOb4DbMsao2SFsGDldcsUe3iA/7jKu02kPubao6xPeZqUYQRBJM5cfc)
   team: T05PN75S6KB
 ---
 
