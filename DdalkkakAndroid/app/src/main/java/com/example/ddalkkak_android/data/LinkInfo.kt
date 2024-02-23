@@ -1,7 +1,11 @@
 package com.example.ddalkkak_android.data
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
 data class LinkInfo(
-    val linkId : Int,
+    @PrimaryKey(autoGenerate = false) val linkId: Int,
     val user: String,
     val username: String?,
     val title: String?,
@@ -9,4 +13,6 @@ data class LinkInfo(
     val thumbUrl: String?,
     val slackCreatedAt: String,
     val isLike: Boolean = false
-)
+) {
+    constructor() : this(0,"","","","","","")
+}
