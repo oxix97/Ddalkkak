@@ -7,4 +7,5 @@ interface LinkInfoRepository {
     suspend fun getLinkInfoByUser(user: String): List<LinkInfo>
     suspend fun getLinkInfoByCreated(created: String): List<LinkInfo>
     suspend fun getCreatedAts(): List<String>
+    suspend fun getSearch(keyword: String): List<LinkInfo>
 }

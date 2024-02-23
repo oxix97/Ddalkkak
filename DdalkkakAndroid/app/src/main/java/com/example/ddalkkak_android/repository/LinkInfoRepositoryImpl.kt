@@ -27,4 +27,10 @@ class LinkInfoRepositoryImpl(private val linkInfoDataSource: LinkInfoDataSource)
     override suspend fun getCreatedAts(): List<String> {
         return linkInfoDataSource.getCreatedAts()
     }
+
+    override suspend fun getSearch(keyword: String): List<LinkInfo> {
+        return linkInfoDataSource.getSearch(keyword).map {
+            LinkInfoMapper.responseLinkInfoToLinkInfo(it)
+        }
+    }
 }

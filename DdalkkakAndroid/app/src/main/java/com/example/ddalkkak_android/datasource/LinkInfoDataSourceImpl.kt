@@ -19,4 +19,8 @@ class LinkInfoDataSourceImpl(private val linkInfoService: LinkInfoService) : Lin
     override suspend fun getCreatedAts(): List<String> {
         return linkInfoService.getCreatedAts()
     }
+
+    override suspend fun getSearch(keyword: String): List<ResponseLinkInfo> {
+        return linkInfoService.getSearch(keyword)
+    }
 }

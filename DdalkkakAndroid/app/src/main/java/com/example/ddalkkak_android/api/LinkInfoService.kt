@@ -22,4 +22,9 @@ interface LinkInfoService {
 
     @GET("created/all")
     suspend fun getCreatedAts(): List<String>
+
+    @GET("link-info/search")
+    suspend fun getSearch(
+        @Query("keyword") keyword: String
+    ) : List<ResponseLinkInfo>
 }
