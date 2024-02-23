@@ -2,8 +2,10 @@ package com.example.ddalkkak_android.ui.fragment
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ddalkkak_android.R
 import com.example.ddalkkak_android.databinding.FragmentUsersBinding
 import com.example.ddalkkak_android.ui.adapter.UserInfoAdapter
@@ -14,7 +16,7 @@ import timber.log.Timber
 
 @AndroidEntryPoint
 class UsersFragment : BaseViewUtil.BaseFragment<FragmentUsersBinding>(R.layout.fragment_users) {
-    private val userInfoViewModel: UserInfoViewModel by viewModels()
+    private val userInfoViewModel: UserInfoViewModel by activityViewModels()
     private lateinit var userInfoAdapter: UserInfoAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -28,7 +30,6 @@ class UsersFragment : BaseViewUtil.BaseFragment<FragmentUsersBinding>(R.layout.f
 
     override fun initData() {
         userInfoAdapter = UserInfoAdapter()
-        userInfoViewModel.getUsers()
     }
 
     override fun initView() {
@@ -42,7 +43,7 @@ class UsersFragment : BaseViewUtil.BaseFragment<FragmentUsersBinding>(R.layout.f
         }
 
         with(binding.rvUserContainer) {
-            this.layoutManager = GridLayoutManager(requireContext(), 2)
+            this.layoutManager = LinearLayoutManager(requireContext())
             adapter = userInfoAdapter
         }
     }
