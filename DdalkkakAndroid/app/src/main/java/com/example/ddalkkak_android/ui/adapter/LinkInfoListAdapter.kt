@@ -6,11 +6,16 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ddalkkak_android.data.LinkInfo
 import com.example.ddalkkak_android.databinding.ItemLinkInfoBinding
+import com.example.ddalkkak_android.ui.viewmodel.LinkInfoViewModel
 import com.example.ddalkkak_android.util.ListAdapterComparator
+import com.example.ddalkkak_android.util.OnItemClickListener
+import timber.log.Timber
 
-class LinkInfoListAdapter : ListAdapter<LinkInfo, LinkInfoListAdapter.ViewHolder>(
-    ListAdapterComparator<LinkInfo>()
-) {
+class LinkInfoListAdapter(val listener: OnItemClickListener) :
+    ListAdapter<LinkInfo, LinkInfoListAdapter.ViewHolder>(
+        ListAdapterComparator<LinkInfo>()
+    ) {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = ItemLinkInfoBinding.inflate(layoutInflater, parent, false)
@@ -27,6 +32,9 @@ class LinkInfoListAdapter : ListAdapter<LinkInfo, LinkInfoListAdapter.ViewHolder
         fun onBind(item: LinkInfo) {
             with(binding) {
                 data = item
+                ivPlus.setOnClickListener {
+                    listener.event(item)
+                }
             }
         }
     }
